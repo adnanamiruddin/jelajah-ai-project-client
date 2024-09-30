@@ -78,7 +78,7 @@ export default function ToolCard({
           {/* Desktop View */}
           <p
             className={`hidden md:inline-block text-gray-400 text-sm ${
-              isExpanded ? "text-justify mt-6" : "text-base text-left mt-4 h-16"
+              isExpanded ? "text-justify my-6" : "text-base text-left mt-4 h-16"
             }`}
           >
             {isExpanded ? description : description.slice(0, 50) + "..."}
@@ -87,7 +87,7 @@ export default function ToolCard({
             href={`${link}`}
             target="_blank"
             rel="noopener"
-            className={`rounded-lg bg-gradient-to-br from-green-800 to-green-400 self-center mt-4 z-30 text-white font-medium flex justify-center items-center gap-0.5 py-1 text-xs md:text-lg md:py-3 md:font-semibold md:mt-2 ${
+            className={`rounded-lg bg-gradient-to-br from-green-800 to-green-400 self-center mt-4 z-30 text-white font-medium flex justify-center items-center gap-0.5 py-1 text-xs md:text-lg md:py-3 md:font-semibold md:mt-2 hover:brightness-110 focus:brightness-75 ${
               isExpanded ? "w-full md:w-3/6" : "w-[120%] md:w-full"
             }`}
           >

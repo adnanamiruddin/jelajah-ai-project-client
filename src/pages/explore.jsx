@@ -11,6 +11,7 @@ import AddToolModalSecond from "@/components/layouts/modals/AddToolModalSecond";
 import AddToolModalThird from "@/components/layouts/modals/AddToolModalThird";
 import toolsApi from "@/api/modules/tools.api";
 import ToolRequestModal from "@/components/layouts/modals/ToolRequestModal";
+import LonelyCat from "@/components/layouts/globals/LonelyCat";
 
 export default function ExplorePage() {
   const [data, setData] = useState([]);
@@ -53,8 +54,6 @@ export default function ExplorePage() {
       status: "approved",
     });
     if (response) {
-      console.log(response);
-
       setData(response);
       setItems(response);
     }
@@ -70,38 +69,40 @@ export default function ExplorePage() {
     getTags();
   }, []);
 
-  // useEffect(() => {
-  //   if (defaultKeyword !== null) {
-  //     const searchResult = data.filter((item) => {
-  //       const isNameMatch = item.name
-  //         .toLowerCase()
-  //         .includes(defaultKeyword.toLowerCase());
-  //       const isDescMatch = item.desc
-  //         .toLowerCase()
-  //         .includes(defaultKeyword.toLowerCase());
-  //       return isNameMatch || isDescMatch;
-  //     });
-  //     setItems(searchResult);
-  //   }
+  useEffect(() => {
+    if (defaultKeyword !== null) {
+      const searchResult = data.filter((item) => {
+        const isNameMatch = item.name
+          .toLowerCase()
+          .includes(defaultKeyword.toLowerCase());
+        const isDescriptionMatch = item.description
+          .toLowerCase()
+          .includes(defaultKeyword.toLowerCase());
+        return isNameMatch || isDescriptionMatch;
+      });
+      setItems(searchResult);
+    }
 
-  //   if (defaultKeyword === "" || defaultKeyword?.length <= 3) {
-  //     setSelectedTags("Semua");
-  //   }
-  // }, [defaultKeyword]);
+    if (defaultKeyword === "" || defaultKeyword?.length <= 3) {
+      setSelectedTags("Semua");
+    }
+  }, [defaultKeyword]);
 
-  // useEffect(() => {
-  //   if (selectedTags === "Semua") {
-  //     setItems(data);
-  //   } else if (selectedTags) {
-  //     const getTagsForChoosenTag = async () => {
-  //       const itemsForTag = await getItemsByTag(selectedTags);
-  //       setItems(itemsForTag);
-  //     };
-  //     getTagsForChoosenTag();
-  //   } else {
-  //     setItems(data);
-  //   }
-  // }, [selectedTags, data]);
+  useEffect(() => {
+    if (selectedTags === "Semua") {
+      setItems(data);
+    } else if (selectedTags) {
+      const getTagsForChoosenTag = async () => {
+        const { response } = await toolsApi.getApprovedToolsByTagName({
+          tagName: selectedTags,
+        });
+        setItems(response);
+      };
+      getTagsForChoosenTag();
+    } else {
+      setItems(data);
+    }
+  }, [selectedTags, data]);
 
   const addDataFormFirst = useFormik({
     initialValues: {
@@ -233,19 +234,30 @@ export default function ExplorePage() {
       </div>
 
       <div className="flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16 md:px-20">
-        {items.map((item, i) => (
-          <ToolCard
-            key={i}
-            name={item.name}
-            image={item.imageURL}
-            description={item.description}
-            link={item.link}
-            video={item.videoURL}
-            isExpanded={i === expandedCard}
-            onClick={() => handleCardClick(i)}
-            handleDetailClick={() => handleShowToolDetail(item)}
-          />
-        ))}
+        {items.length > 0 ? (
+          <>
+            {items.map((item, i) => (
+              <ToolCard
+                key={i}
+                name={item.name}
+                image={item.imageURL}
+                description={item.description}
+                link={item.link}
+                video={item.videoURL}
+                isExpanded={i === expandedCard}
+                onClick={() => handleCardClick(i)}
+                handleDetailClick={() => handleShowToolDetail(item)}
+              />
+            ))}
+          </>
+        ) : (
+          <div className="mt-12">
+            <LonelyCat />
+            <p className="mt-8 text-center font-semibold text-lg">
+              Tidak ada AI ditemukan
+            </p>
+          </div>
+        )}
       </div>
 
       <AddToolModalFirst addDataForm={addDataFormFirst} />

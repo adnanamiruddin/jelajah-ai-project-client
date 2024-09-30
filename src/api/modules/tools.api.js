@@ -5,7 +5,7 @@ const toolsEndpoint = {
   tools: "/tools",
   toolsByStatus: ({ status }) => `/tools/${status}`,
   toolsTags: "/tools/tags",
-  toolsApprovedByTagId: ({ tagId }) => `/tools/approved/${tagId}`,
+  toolsApprovedByTagName: ({ tagName }) => `/tools/approved/${tagName}`,
   toolsUpdateStatus: ({ toolId }) => `/tools//update-status/${toolId}`,
 };
 
@@ -30,10 +30,10 @@ const toolsApi = {
     }
   },
 
-  getApprovedToolsByTagId: async ({ tagId }) => {
+  getApprovedToolsByTagName: async ({ tagName }) => {
     try {
       const response = await publicClient.get(
-        toolsEndpoint.toolsApprovedByTagId({ tagId })
+        toolsEndpoint.toolsApprovedByTagName({ tagName })
       );
       return { response };
     } catch (error) {
