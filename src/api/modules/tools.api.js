@@ -54,7 +54,7 @@ const toolsApi = {
     tagsIdList,
   }) => {
     try {
-      const response = await privateClient.post(toolsEndpoint.tools, {
+      const response = await publicClient.post(toolsEndpoint.tools, {
         name,
         description,
         link,
