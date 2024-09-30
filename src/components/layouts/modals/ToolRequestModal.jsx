@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ToolRequestModal({ selectedToolRequest }) {
   return (
@@ -41,7 +42,7 @@ export default function ToolRequestModal({ selectedToolRequest }) {
                     Nama
                   </h3>
                   <p className="w-[70%] py-2 px-3 border border-gray-300 break-words whitespace-normal">
-                    {selectedToolRequest.userProfileName || "-"}
+                    {selectedToolRequest.userProfile.name || "-"}
                   </p>
                 </div>
                 {/*  */}
@@ -50,7 +51,17 @@ export default function ToolRequestModal({ selectedToolRequest }) {
                     Instagram
                   </h3>
                   <p className="w-[70%] py-2 px-3 border border-gray-300 break-words whitespace-normal">
-                    {selectedToolRequest.instagramURL || "-"}
+                    {selectedToolRequest.userProfile.instagramURL !== "" ? (
+                      <Link
+                        href={selectedToolRequest.userProfile.instagramURL}
+                        target="_blank"
+                        className="underline"
+                      >
+                        {selectedToolRequest.userProfile.instagramURL}
+                      </Link>
+                    ) : (
+                      "-"
+                    )}
                   </p>
                 </div>
                 {/*  */}
@@ -59,7 +70,17 @@ export default function ToolRequestModal({ selectedToolRequest }) {
                     YouTube
                   </h3>
                   <p className="w-[70%] py-2 px-3 border border-gray-300 break-words whitespace-normal">
-                    {selectedToolRequest.youtubeURL}
+                    {selectedToolRequest.userProfile.youtubeURL !== "" ? (
+                      <Link
+                        href={selectedToolRequest.userProfile.youtubeURL}
+                        target="_blank"
+                        className="underline"
+                      >
+                        {selectedToolRequest.userProfile.youtubeURL}
+                      </Link>
+                    ) : (
+                      "-"
+                    )}
                   </p>
                 </div>
                 {/*  */}
@@ -68,7 +89,17 @@ export default function ToolRequestModal({ selectedToolRequest }) {
                     TikTok
                   </h3>
                   <p className="w-[70%] py-2 px-3 border border-gray-300 break-words whitespace-normal">
-                    {selectedToolRequest.tiktokURL}
+                    {selectedToolRequest.userProfile.tiktokURL !== "" ? (
+                      <Link
+                        href={selectedToolRequest.userProfile.tiktokURL}
+                        target="_blank"
+                        className="underline"
+                      >
+                        {selectedToolRequest.userProfile.tiktokURL}
+                      </Link>
+                    ) : (
+                      "-"
+                    )}
                   </p>
                 </div>
               </div>
