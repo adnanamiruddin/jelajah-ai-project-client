@@ -13,7 +13,7 @@ export default function ProtectedPage({ children }) {
     const checkUser = setTimeout(() => {
       if (!user) {
         // toast.error("Anda harus masuk terlebih dahulu");
-        router.push("/login");
+        router.push("/");
       }
       setIsChecking(false);
     }, 3000);

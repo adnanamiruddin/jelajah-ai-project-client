@@ -75,7 +75,7 @@ export default function MainLayout({ children }) {
           <div className="bg-[#071015] text-white min-h-screen">
             <DashboardSidebar />
 
-            <div class="py-10 px-8 mt-14 sm:ml-64">{children}</div>
+            <div className="py-10 px-8 mt-14 sm:ml-64">{children}</div>
           </div>
         </ProtectedPage>
       ) : router.asPath === "/" ? (

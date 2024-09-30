@@ -1,8 +1,8 @@
 /* Global Loading */
 .loader {
   --duration: 3s;
-  --primary: #00aaff;
-  --primary-light: #33ccff;
+  --primary: #00aa55;
+  --primary-light: #33cc77;
   --primary-rgba: rgba(0, 170, 255, 0);
   width: 200px;
   height: 320px;

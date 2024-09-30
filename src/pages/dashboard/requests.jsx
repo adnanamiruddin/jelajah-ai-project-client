@@ -2,7 +2,7 @@ import toolsApi from "@/api/modules/tools.api";
 import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { CiSquareInfo } from "react-icons/ci";
+import { IoInformationCircleOutline } from "react-icons/io5";
 import Link from "next/link";
 import ToolRequestModal from "@/components/layouts/modals/ToolRequestModal";
 import { FiCheck, FiX } from "react-icons/fi";
@@ -36,7 +36,7 @@ export default function DashboardRequestsPage() {
     <>
       {isDataLoaded ? (
         <div>
-          <h1 class="text-3xl font-bold">
+          <h1 className="text-3xl font-bold">
             Daftar Permintaan Penerimaan Rekomendasi AI
           </h1>
 
@@ -44,19 +44,21 @@ export default function DashboardRequestsPage() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-900 text-white text-lg">
-                  <th className="w-[15%] text-start p-3 ps-5">No</th>
+                  <th className="w-[15%] text-start p-3 ps-5 rounded-tl-md">
+                    No
+                  </th>
                   <th className="w-[25%] text-start p-3">Nama</th>
                   <th className="w-[15%] text-start p-3">Link AI</th>
                   <th className="w-[15%] text-start p-3">Link Video</th>
                   <th className="w-[15%] text-start p-3">Selengkapnya</th>
-                  <th className="w-[15%] text-start p-3">Aksi</th>
+                  <th className="w-[15%] text-start p-3 rounded-tr-md">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {tools.map((tool, i) => (
                   <tr
                     key={i}
-                    className="my-4 font-semibold even:bg-gray-200 last:border-b last:border-sky-500"
+                    className="my-4 font-semibold odd:bg-gray-800 even:bg-gray-900 last:border-b last:border-gray-500"
                   >
                     <td className="w-[15%] text-start p-3 ps-5">{i + 1}</td>
                     <td className="w-[25%] text-start p-3">{tool.name}</td>
@@ -88,7 +90,7 @@ export default function DashboardRequestsPage() {
                         }}
                         className="ms-10"
                       >
-                        <CiSquareInfo className="text-4xl" />
+                        <IoInformationCircleOutline className="text-3xl" />
                       </button>
                     </td>
                     <td className="w-[15%] text-start p-3">
@@ -122,8 +124,14 @@ export default function DashboardRequestsPage() {
           </div>
 
           <ToolRequestModal selectedToolRequest={selectedToolRequest} />
-          <ToolRequestAcceptModal selectedToolRequest={selectedToolRequest} />
-          <ToolRequestRejectModal selectedToolRequest={selectedToolRequest} />
+          <ToolRequestAcceptModal
+            selectedToolRequest={selectedToolRequest}
+            fetchTools={fetchTools}
+          />
+          <ToolRequestRejectModal
+            selectedToolRequest={selectedToolRequest}
+            fetchTools={fetchTools}
+          />
         </div>
       ) : (
         <GlobalLoading />

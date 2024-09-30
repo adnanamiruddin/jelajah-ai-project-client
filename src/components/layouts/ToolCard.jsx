@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CiSquareInfo } from "react-icons/ci";
+import { IoInformationCircleOutline } from "react-icons/io5";
 import { RxArrowTopRight } from "react-icons/rx";
 
 export default function ToolCard({
@@ -26,7 +26,7 @@ export default function ToolCard({
         }`}
       >
         <button onClick={handleDetailClick} className="absolute top-2 right-2">
-          <CiSquareInfo className="text-4xl" />
+          <IoInformationCircleOutline className="text-3xl" />
         </button>
 
         {isExpanded ? (

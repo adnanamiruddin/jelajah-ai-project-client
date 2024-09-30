@@ -1,7 +1,7 @@
 export default function DashboardPage() {
   return (
     <div>
-      <h1 class="text-3xl font-bold">Beranda</h1>
+      <h1 className="text-3xl font-bold">Beranda</h1>
     </div>
   );
 }
