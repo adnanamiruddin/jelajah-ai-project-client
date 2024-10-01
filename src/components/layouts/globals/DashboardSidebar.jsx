@@ -112,7 +112,7 @@ export default function DashboardSidebar() {
                 </Link>
               </li>
             ))}
-            <li>
+            {/* <li>
               <div className="bg-gray-300 h-0.5 opacity-20"></div>
             </li>
             <li>
@@ -125,7 +125,7 @@ export default function DashboardSidebar() {
                 <CgProfile className="text-2xl text-gray-300 transition duration-75 group-hover:text-white" />
                 <span className="ms-3">Profil</span>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </aside>

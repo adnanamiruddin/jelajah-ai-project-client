@@ -41,7 +41,7 @@ export default function DashboardRequestsPage() {
           </h1>
 
           <div className="mt-6">
-            <table className="w-full">
+            <table className="w-full overscroll-auto">
               <thead>
                 <tr className="bg-gray-900 text-white text-lg">
                   <th className="w-[15%] text-start p-3 ps-5 rounded-tl-md">
@@ -68,7 +68,7 @@ export default function DashboardRequestsPage() {
                         target="_blank"
                         className="underline"
                       >
-                        {tool.link}
+                        {tool.link.slice(0, 25) + "..."}
                       </Link>
                     </td>
                     <td className="w-[15%] text-start p-3">
@@ -77,7 +77,7 @@ export default function DashboardRequestsPage() {
                         target="_blank"
                         className="underline"
                       >
-                        {tool.videoURL}
+                        {tool.videoURL.slice(0, 500) + "..."}
                       </Link>
                     </td>
                     <td className="w-[15%] text-start p-3">

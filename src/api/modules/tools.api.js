@@ -6,7 +6,7 @@ const toolsEndpoint = {
   toolsByStatus: ({ status }) => `/tools/${status}`,
   toolsTags: "/tools/tags",
   toolsApprovedByTagName: ({ tagName }) => `/tools/approved/${tagName}`,
-  toolsUpdateStatus: ({ toolId }) => `/tools//update-status/${toolId}`,
+  toolsUpdateStatus: ({ toolId }) => `/tools/update-status/${toolId}`,
 };
 
 const toolsApi = {
