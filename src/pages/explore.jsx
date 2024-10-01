@@ -12,6 +12,7 @@ import AddToolModalThird from "@/components/layouts/modals/AddToolModalThird";
 import toolsApi from "@/api/modules/tools.api";
 import ToolRequestModal from "@/components/layouts/modals/ToolRequestModal";
 import LonelyCat from "@/components/layouts/globals/LonelyCat";
+import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 
 export default function ExplorePage() {
   const [data, setData] = useState([]);
@@ -56,17 +57,22 @@ export default function ExplorePage() {
     if (response) {
       setData(response);
       setItems(response);
+      getTags();
     }
   };
   //
   const getTags = async () => {
     const { response } = await toolsApi.getTags();
-    if (response) setTags(response);
+    if (response) {
+      setTags(response);
+      setTimeout(() => {
+        setIsDataLoaded(true);
+      }, 1000);
+    }
   };
   //
   useEffect(() => {
     getTools();
-    getTags();
   }, []);
 
   useEffect(() => {
@@ -233,32 +239,38 @@ export default function ExplorePage() {
         </MotionDiv>
       </div>
 
-      <div className="flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16 md:px-20">
-        {items.length > 0 ? (
-          <>
-            {items.map((item, i) => (
-              <ToolCard
-                key={i}
-                name={item.name}
-                image={item.imageURL}
-                description={item.description}
-                link={item.link}
-                video={item.videoURL}
-                isExpanded={i === expandedCard}
-                onClick={() => handleCardClick(i)}
-                handleDetailClick={() => handleShowToolDetail(item)}
-              />
-            ))}
-          </>
-        ) : (
-          <div className="mt-12">
-            <LonelyCat />
-            <p className="mt-8 text-center font-semibold text-lg">
-              Tidak ada AI ditemukan
-            </p>
-          </div>
-        )}
-      </div>
+      {isDataLoaded ? (
+        <div className="flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16 md:px-20">
+          {items.length > 0 ? (
+            <>
+              {items.map((item, i) => (
+                <ToolCard
+                  key={i}
+                  name={item.name}
+                  image={item.imageURL}
+                  description={item.description}
+                  link={item.link}
+                  video={item.videoURL}
+                  isExpanded={i === expandedCard}
+                  onClick={() => handleCardClick(i)}
+                  handleDetailClick={() => handleShowToolDetail(item)}
+                />
+              ))}
+            </>
+          ) : (
+            <div className="mt-12">
+              <LonelyCat />
+              <p className="mt-8 text-center font-semibold text-lg">
+                Tidak ada AI ditemukan
+              </p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="-mt-12">
+          <GlobalLoading />
+        </div>
+      )}
 
       <AddToolModalFirst addDataForm={addDataFormFirst} />
       <AddToolModalSecond
