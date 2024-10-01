@@ -14,6 +14,7 @@ import LoginModal from "./layouts/modals/LoginModal";
 import RegisterModal from "./layouts/modals/RegisterModal";
 import DashboardSidebar from "./layouts/globals/DashboardSidebar";
 import ProtectedPage from "./utils/ProtectedPage";
+import ModalSubmitButton from "./layouts/functions/ModalSubmitButton";
 
 export default function MainLayout({ children }) {
   const dispatch = useDispatch();
@@ -72,10 +73,19 @@ export default function MainLayout({ children }) {
 
       {router.asPath.includes("dashboard") ? (
         <ProtectedPage>
-          <div className="bg-[#071015] text-white min-h-screen">
+          <div className="hidden md:block bg-[#071015] text-white min-h-screen">
             <DashboardSidebar />
 
             <div className="py-10 px-8 mt-14 sm:ml-64">{children}</div>
+          </div>
+
+          <div className="md:hidden bg-[#071015] text-white min-h-screen flex justify-center items-center flex-col gap-8">
+            <h1 className="font-semibold text-3xl text-center">
+              Silahkan akses menggunakan laptop
+            </h1>
+            <ModalSubmitButton onClick={() => router.push("/")}>
+              Kembali
+            </ModalSubmitButton>
           </div>
         </ProtectedPage>
       ) : router.asPath === "/" ? (

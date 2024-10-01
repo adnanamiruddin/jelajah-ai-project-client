@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function ToolRequestAcceptModal({
   selectedToolRequest,
+  setTools,
   fetchTools,
 }) {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,9 @@ export default function ToolRequestAcceptModal({
       status: "approved",
     });
     if (response) {
+      setTools((prevTools) =>
+        prevTools.filter((tool) => tool.id !== selectedToolRequest.id)
+      );
       document.getElementById("tool_request_accept_modal").close();
       toast.success("Berhasil menerima permintaan rekomendasi AI!");
       setLoading(false);

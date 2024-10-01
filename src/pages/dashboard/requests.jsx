@@ -8,6 +8,7 @@ import ToolRequestModal from "@/components/layouts/modals/ToolRequestModal";
 import { FiCheck, FiX } from "react-icons/fi";
 import ToolRequestAcceptModal from "@/components/layouts/modals/ToolRequestAcceptModal";
 import ToolRequestRejectModal from "@/components/layouts/modals/ToolRequestRejectModal";
+import LonelyCat from "@/components/layouts/globals/LonelyCat";
 
 export default function DashboardRequestsPage() {
   const [tools, setTools] = useState([]);
@@ -121,15 +122,27 @@ export default function DashboardRequestsPage() {
                 ))}
               </tbody>
             </table>
+            {tools.length === 0 ? (
+              <div className="mt-16 flex justify-center w-full">
+                <div>
+                  <LonelyCat />
+                  <p className="mt-8 text-center font-semibold text-lg">
+                    Tidak ada permintaan rekomendasi AI
+                  </p>
+                </div>
+              </div>
+            ) : null}
           </div>
 
           <ToolRequestModal selectedToolRequest={selectedToolRequest} />
           <ToolRequestAcceptModal
             selectedToolRequest={selectedToolRequest}
+            setTools={setTools}
             fetchTools={fetchTools}
           />
           <ToolRequestRejectModal
             selectedToolRequest={selectedToolRequest}
+            setTools={setTools}
             fetchTools={fetchTools}
           />
         </div>

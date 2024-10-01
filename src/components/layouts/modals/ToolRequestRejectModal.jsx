@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function ToolRequestRejectModal({
   selectedToolRequest,
+  setTools,
   fetchTools,
 }) {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,9 @@ export default function ToolRequestRejectModal({
       status: "rejected",
     });
     if (response) {
+      setTools((prevTools) =>
+        prevTools.filter((tool) => tool.id !== selectedToolRequest.id)
+      );
       document.getElementById("tool_request_reject_modal").close();
       toast.success("Berhasil menolak permintaan rekomendasi AI!");
       setLoading(false);

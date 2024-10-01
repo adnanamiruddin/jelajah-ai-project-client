@@ -4,13 +4,18 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { FiLogOut } from "react-icons/fi";
+import { MdAccountCircle, MdDashboard } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/features/userSlice";
+import { auth } from "@/api/config/firebase.config";
 
 const dashboardLinks = [
   {
     title: "Beranda",
     href: "/dashboard",
     icon: (
-      <IoHome className="text-2xl text-gray-300 transition duration-75 group-hover:text-white" />
+      <MdDashboard className="text-2xl text-gray-300 transition duration-75 group-hover:text-white" />
     ),
   },
   {
@@ -22,8 +27,29 @@ const dashboardLinks = [
   },
 ];
 
+const dropdownLinks = [
+  {
+    href: "/",
+    label: "Utama",
+    icon: <IoHome className="text-2xl me-1" />,
+  },
+];
+
 export default function DashboardSidebar() {
+  const dispatch = useDispatch();
+
   const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      dispatch(setUser(null));
+      toast.info("Bye bye 👋");
+      router.push("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <>
@@ -31,28 +57,6 @@ export default function DashboardSidebar() {
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
-              <button
-                data-drawer-target="logo-sidebar"
-                data-drawer-toggle="logo-sidebar"
-                aria-controls="logo-sidebar"
-                type="button"
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-              >
-                <span className="sr-only">Open sidebar</span>
-                <svg
-                  className="w-6 h-6"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    clipRule="evenodd"
-                    fillRule="evenodd"
-                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                  ></path>
-                </svg>
-              </button>
               <Link href="/" className="flex ms-2 md:me-24">
                 <Image
                   priority
@@ -68,24 +72,48 @@ export default function DashboardSidebar() {
               </Link>
             </div>
             <div className="flex items-center">
-              <div className="flex items-center ms-3">
-                <div>
-                  <button
-                    type="button"
-                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                    aria-expanded="false"
-                    data-dropdown-toggle="dropdown-user"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <Image
-                      src="/home-content_4.jpeg"
-                      alt="User's Photo"
-                      width={200}
-                      height={200}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  </button>
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="font-semibold shadow-lg border-0 text-white bg-transparent hover:shadow-slate-900 hover:backdrop-blur-sm hover:bg-transparent focus:bg-transparent focus:backdrop-blur-sm rounded-full focus:ring-4 focus:ring-gray-300"
+                >
+                  <Image
+                    src="/home-content_4.jpeg"
+                    alt="User's Photo"
+                    width={200}
+                    height={200}
+                    className="w-8 h-8 rounded-full"
+                  />
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-transparent backdrop-blur-sm hover:bg-transparent border-2 border-green-500 border-t-0 border-r-0 rounded-tr-none"
+                >
+                  <>
+                    {dropdownLinks.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-sm text-white font-semibold hover:bg-gradient-to-br from-green-800 to-green-400"
+                        >
+                          {link.icon}
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="text-white font-semibold mt-2 bg-red-600 hover:bg-red-500 focus:bg-red-800"
+                    >
+                      <FiLogOut className="text-2xl me-1" />
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export default function DashboardPage() {
     <div>
       <h1 className="text-3xl font-bold">Beranda</h1>
 
-      <div className="mt-6 flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16 md:px-20">
+      <div className="mt-6 flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16">
         {items.length > 0 ? (
           <>
             {items.map((item, i) => (
