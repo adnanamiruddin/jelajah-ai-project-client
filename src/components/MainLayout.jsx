@@ -96,7 +96,7 @@ export default function MainLayout({ children }) {
       )}
 
       <LoginModal />
-      <RegisterModal />
+      {/* <RegisterModal /> */}
 
       <div className={`${router.asPath.includes("dashboard") ? "hidden" : ""}`}>
         <Footer />

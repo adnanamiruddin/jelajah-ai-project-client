@@ -63,8 +63,6 @@ export default function RegisterModal() {
         }
         if (error) setErrorMessage(error.message);
       } catch (error) {
-        console.log(error);
-
         setErrorMessage("Pendaftaran gagal. Silahkan coba lagi");
       } finally {
         setLoading(false);

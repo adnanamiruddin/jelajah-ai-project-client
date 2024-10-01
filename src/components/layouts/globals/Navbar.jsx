@@ -138,17 +138,6 @@ export default function Navbar({ isCarouselPassed }) {
                   <button
                     onClick={() => {
                       document.getElementById("navbar_drawer").checked = false;
-                      document.getElementById("register_modal").showModal();
-                    }}
-                    className="text-lg font-semibold bg-gray-900"
-                  >
-                    Register
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => {
-                      document.getElementById("navbar_drawer").checked = false;
                       document.getElementById("login_modal").showModal();
                     }}
                     className="text-lg font-semibold bg-gray-900"
@@ -156,6 +145,17 @@ export default function Navbar({ isCarouselPassed }) {
                     Login
                   </button>
                 </li>
+                {/* <li>
+                  <button
+                    onClick={() => {
+                      document.getElementById("navbar_drawer").checked = false;
+                      document.getElementById("register_modal").showModal();
+                    }}
+                    className="text-lg font-semibold bg-gray-900"
+                  >
+                    Register
+                  </button>
+                </li> */}
               </>
             )}
           </ul>
