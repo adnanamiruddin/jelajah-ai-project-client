@@ -1,4 +1,5 @@
 import Image from "next/image";
+import MotionDiv from "./MotionDiv";
 
 export default function HomeHero() {
   return (
@@ -14,15 +15,20 @@ export default function HomeHero() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#071015] from-10% z-10"></div>
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center w-11/12 md:w-1/2">
-        <h1 className="text-3xl md:text-4xl font-bold">
-          The Web for Content Creators
-        </h1>
-        <p className="mt-4 md:text-lg">
-          Temukan berbagai AI yang bisa membantu membuat karya lebih cepat,
-          lebih efektif, dan lebih menarik. Yuk, mulai eksplorasi AI untuk
-          menciptakan konten yang lebih menarik dan unik!
-        </p>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center w-11/12 md:w-1/2 md:top-[40%]">
+        <MotionDiv y={-100} delay={1}>
+          <h1 className="text-3xl md:text-4xl font-bold">
+            The Web for Content Creators
+          </h1>
+        </MotionDiv>
+
+        <MotionDiv y={100} delay={1}>
+          <p className="mt-4 md:text-lg">
+            Temukan berbagai AI yang bisa membantu membuat karya lebih cepat,
+            lebih efektif, dan lebih menarik. Yuk, mulai eksplorasi AI untuk
+            menciptakan konten yang lebih menarik dan unik!
+          </p>
+        </MotionDiv>
       </div>
     </div>
   );
