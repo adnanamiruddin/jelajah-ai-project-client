@@ -102,7 +102,7 @@ export default function ExplorePage() {
         const { response } = await toolsApi.getApprovedToolsByTagName({
           tagName: selectedTags,
         });
-        setItems(response);
+        setItems(response || []);
       };
       getTagsForChoosenTag();
     } else {
@@ -241,7 +241,7 @@ export default function ExplorePage() {
 
       {isDataLoaded ? (
         <div className="flex gap-5 flex-wrap md:flex-row relative h-full justify-center items-center pt-2 pb-16 md:px-20">
-          {items.length > 0 ? (
+          {items?.length > 0 ? (
             <>
               {items.map((item, i) => (
                 <ToolCard
